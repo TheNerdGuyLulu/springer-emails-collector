@@ -72,7 +72,7 @@ def get_articles(q, p, s, emails):
                 for url in record['url']:
                     if url['format'] != 'pdf':
                         futures.append(executor.submit(get_emails, session, url['value'], emails))
-                        break;
+                        break
             for future in concurrent.futures.as_completed(futures):
                 pass  # write to file here
     except requests.exceptions.HTTPError as e:
