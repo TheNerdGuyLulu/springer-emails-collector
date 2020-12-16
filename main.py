@@ -62,7 +62,7 @@ def get_articles(q, p, s, emails):
     :param emails: email set to add the emails found
     """
     try:
-        r = requests.get(f'http://api.springernature.com/meta/v2/json?p={p}&s={s}&q={q}&api_key=a710ee53165bdaf3fac89eb940cf2e29')
+        r = requests.get(f'http://api.springernature.com/metadata/json?p={p}&s={s}&q={q}&api_key=a710ee53165bdaf3fac89eb940cf2e29')
         r.raise_for_status()
         rjson = r.json()
         session = requests.Session()
@@ -76,7 +76,7 @@ def get_articles(q, p, s, emails):
             for future in concurrent.futures.as_completed(futures):
                 pass  # write to file here
     except requests.exceptions.HTTPError as e:
-        print(f'Request failed - http://api.springernature.com/meta/v2/json?p={p}&s={s}&q={q}&api_key=a710ee53165bdaf3fac89eb940cf2e29')
+        print(f'Request failed - http://api.springernature.com/metadata/json?p={p}&s={s}&q={q}&api_key=a710ee53165bdaf3fac89eb940cf2e29')
 
 
 def get_emails(session, url, emails):
