@@ -1,6 +1,6 @@
-# Springer email grabber
+# Springer email collector
 
-Grab email from springer 13 million online documents
+Collect emails from springer's 13 million online documents
 
 ## Installation
 
