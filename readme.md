@@ -16,5 +16,10 @@ python3 -m pip install requests
 python3 -m pip install beautifulsoup4
 ```
 
+## Run
+```bash
+python3 main.py
+```
+
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
