@@ -3,7 +3,6 @@ import concurrent.futures
 import math
 from bs4 import BeautifulSoup
 from datetime import datetime
-
 from functions import write_emails_to_csv
 
 
@@ -28,7 +27,7 @@ def springer_emails(title: str, subject: str, quantity: int):
 
     looper = math.ceil(quantity / 50)
     for x in range(0, looper):
-        print(str(int(50 * x / looper)) + '%')
+        print(str(int(100 * x / looper)) + '%')
         get_articles(q, 50, (x * 50) + 1, emails)
 
     if len(emails) == 0:
@@ -51,7 +50,6 @@ def get_articles(q: str, p: int, s: int, emails: set):
     :param s: Starts at index s
     :param emails: email set to add the emails found
     """
-
     url = f'http://api.springernature.com/metadata/json?p={p}&s={s}&q={q}&api_key=a710ee53165bdaf3fac89eb940cf2e29'
     try:
         print(url)
