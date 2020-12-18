@@ -2,6 +2,15 @@ import csv
 from datetime import datetime
 
 
+def validate_input_as_int(message, default):
+    while True:
+        try:
+            return int(input(message) or default)
+        except ValueError:
+            print('Invalid number!')
+            continue
+
+
 def write_emails_to_csv(emails):
     """
     :param emails: email set to write to file

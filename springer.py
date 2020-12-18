@@ -20,9 +20,12 @@ def springer_emails(title, subject, quantity):
     if subject:
         q += f' subject:"{subject}"'
 
+    # Ceil to multiple of 50
+    quantity = 50 * math.ceil(int(quantity) / 50)
+
     looper = math.ceil(quantity / 50)
     for x in range(0, looper):
-        print(str(int(100 * x / looper)) + '%')
+        print(str(int(50 * x / looper)) + '%')
         get_articles(q, 50, (x * 50) + 1, emails)
 
     if len(emails) == 0:
@@ -45,9 +48,11 @@ def get_articles(q, p, s, emails):
     :param s: Starts at index s
     :param emails: email set to add the emails found
     """
+
+    url = f'http://api.springernature.com/metadata/json?p={p}&s={s}&q={q}&api_key=a710ee53165bdaf3fac89eb940cf2e29'
     try:
-        print(f'http://api.springernature.com/metadata/json?p={p}&s={s}&q={q}&api_key=a710ee53165bdaf3fac89eb940cf2e29')
-        r = requests.get(f'http://api.springernature.com/metadata/json?p={p}&s={s}&q={q}&api_key=a710ee53165bdaf3fac89eb940cf2e29')
+        print(url)
+        r = requests.get(url)
         r.raise_for_status()
         rjson = r.json()
         session = requests.Session()
@@ -61,7 +66,7 @@ def get_articles(q, p, s, emails):
             for future in concurrent.futures.as_completed(futures):
                 pass  # write to file here
     except requests.exceptions.HTTPError as e:
-        print(f'Request failed - http://api.springernature.com/metadata/json?p={p}&s={s}&q={q}&api_key=a710ee53165bdaf3fac89eb940cf2e29')
+        print(f'Request failed - {url}')
 
 
 def get_emails(session, url, emails):
