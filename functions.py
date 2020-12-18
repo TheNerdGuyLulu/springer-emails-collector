@@ -2,7 +2,7 @@ import csv
 from datetime import datetime
 
 
-def validate_input_as_int(message, default):
+def validate_input_as_int(message: str, default: int):
     while True:
         try:
             return int(input(message) or default)
@@ -11,7 +11,7 @@ def validate_input_as_int(message, default):
             continue
 
 
-def write_emails_to_csv(emails):
+def write_emails_to_csv(emails: set):
     """
     :param emails: email set to write to file
     """

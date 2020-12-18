@@ -7,7 +7,7 @@ from datetime import datetime
 from functions import write_emails_to_csv
 
 
-def springer_emails(title, subject, quantity):
+def springer_emails(title: str, subject: str, quantity: int):
     """
     :param title: Article contains title param
     :param subject: Subject of articles to search
@@ -16,7 +16,10 @@ def springer_emails(title, subject, quantity):
     emails = set()
     start = datetime.utcnow()
 
-    q = f'title:"{title}"'
+    q = ''
+    for keyword in title.split():
+        q += f'title:"{keyword}" '
+
     if subject:
         q += f' subject:"{subject}"'
 
@@ -41,7 +44,7 @@ def springer_emails(title, subject, quantity):
             write_emails_to_csv(emails)
 
 
-def get_articles(q, p, s, emails):
+def get_articles(q: str, p: int, s: int, emails: set):
     """
     :param q: Query - Article contains title
     :param p: Quantity of results (max 100)
@@ -69,7 +72,7 @@ def get_articles(q, p, s, emails):
         print(f'Request failed - {url}')
 
 
-def get_emails(session, url, emails):
+def get_emails(session: requests.Session, url: str, emails: set):
     """
     :param session: Session instance to keep connection open, fastening the process
     :param url: URl of a single article
